@@ -1,11 +1,8 @@
-# Use the official Nginx image as the base
-FROM nginx:latest
+# Use Amazon ECR Public to avoid Docker Hub rate limits
+FROM public.ecr.aws/nginx/nginx:alpine
 
-# Copy the 2048 game files to the Nginx web root
+# Copy site assets (adjust the source path if your game lives in a subfolder)
 COPY . /usr/share/nginx/html
 
-# Expose the default Nginx HTTP port
 EXPOSE 80
-
-# Start Nginx when the container starts
 CMD ["nginx", "-g", "daemon off;"]
